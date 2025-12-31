@@ -22,7 +22,7 @@ options = webdriver.ChromeOptions()
 options.add_argument('--headless')
 options.add_argument('--window-size=1920,1200')
 
-driver = webdriver.Chrome(service=service , options=options)
+driver = webdriver.Chrome(options=options)
 
 wait = random.uniform(10,15)
 
@@ -92,5 +92,6 @@ except:
         append[col] = append[col].astype(str)
 
         work.append_rows(append.values.tolist(), value_input_option='USER_ENTERED')
+
 
 
