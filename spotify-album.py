@@ -1,6 +1,5 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
@@ -18,10 +17,7 @@ serv = Service('chromedriver.exe')
 driver = webdriver.Chrome(service=serv, options=options)
 wait = WebDriverWait(driver, 15)
 
-#'https://open.spotify.com/section/0JQ5DB5E8N831KzFzsBBQ2' # song 
-#'https://open.spotify.com/section/0JQ5DAnM3wGh0gz1MXnu3C', # artist
-url = 'https://open.spotify.com/section/0JQ5DAnM3wGh0gz1MXnu3B' # album, 
-#'https://open.spotify.com/section/0JQ5DAnM3wGh0gz1MXnu4h'] # radio 
+url = 'https://open.spotify.com/section/0JQ5DAnM3wGh0gz1MXnu3B'  
             
 driver.get(url)
 wait = WebDriverWait(driver, 25)
@@ -53,7 +49,6 @@ for card in cards:
 
 df = pd.DataFrame(data)
 df['rank'] = np.arange(1, len(df) + 1)
-#print(df)
 print("rows:", len(df))
 
 import pandas as pd
@@ -63,7 +58,7 @@ from google.oauth2.service_account import Credentials
 
 role = ['https://www.googleapis.com/auth/spreadsheets','https://www.googleapis.com/auth/drive']
 
-json_key = 'izzo-472202-6ac4e89e0c3d.json'
+json_key = 'json_key.json'
 credits = Credentials.from_service_account_file(json_key, scopes=role)
 client = gspread.authorize(credits)
 
@@ -79,4 +74,5 @@ except:
     append = df.copy()
     for col in append.select_dtypes(include=['datetime', 'datetimetz']).columns:
         append[col] = append[col].astype(str)
+
         work.append_rows(append.values.tolist(), value_input_option='USER_ENTERED')
