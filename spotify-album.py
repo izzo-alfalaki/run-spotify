@@ -13,8 +13,7 @@ options = webdriver.ChromeOptions()
 options.add_argument('--headless')
 options.add_argument('--window-size=1300,800')
 
-serv = Service('chromedriver.exe')
-driver = webdriver.Chrome(service=serv, options=options)
+driver = webdriver.Chrome(options=options)
 wait = WebDriverWait(driver, 15)
 
 url = 'https://open.spotify.com/section/0JQ5DAnM3wGh0gz1MXnu3B'  
@@ -76,3 +75,4 @@ except:
         append[col] = append[col].astype(str)
 
         work.append_rows(append.values.tolist(), value_input_option='USER_ENTERED')
+
