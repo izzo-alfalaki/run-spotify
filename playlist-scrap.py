@@ -25,7 +25,6 @@ options.add_argument('--window-size=1920,1200')
 service = Service('chromedriver.exe')
 driver = webdriver.Chrome(service=service , options=options)
 
-#pisau utk masuk hutan
 wait = random.uniform(10,15)
 
 data = []
@@ -45,13 +44,8 @@ for url in urls:
     html = BeautifulSoup(driver.page_source, 'html.parser')
     print('html retrieved') 
     
-    #data-testid="entityTitle"
-    #playlist image = src="https://charts-images.scdn.co/assets/locale_en/regional/weekly/region_my_default.jpg"
-    #data-transition="sponsoredPlaylistHeaderText"
-
     playlist_name = html.find('h1')
     playlist_name = playlist_name.text.strip() if playlist_name else None
-    #rows = html.find_all('div', {'role': 'row'})
     rows = html.select('div[role="row"]:has(a[data-testid="internal-track-link"])')
     for row in rows:
         img = row.find('img')
@@ -82,8 +76,8 @@ from gspread_dataframe import set_with_dataframe
 from google.oauth2.service_account import Credentials
 
 role = ['https://www.googleapis.com/auth/spreadsheets','https://www.googleapis.com/auth/drive']
-
 json_key = 'json_key.json'
+
 credits = Credentials.from_service_account_file(json_key, scopes=role)
 client = gspread.authorize(credits)
 
@@ -99,3 +93,4 @@ except:
         append[col] = append[col].astype(str)
 
         work.append_rows(append.values.tolist(), value_input_option='USER_ENTERED')
+
