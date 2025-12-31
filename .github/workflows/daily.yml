@@ -8,14 +8,34 @@ on:
 jobs:
   run:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install -r requirements.txt
-      - run: spotify-album.py
-      - run: spotify-artist.py
-      - run: spotify-radio.py
-      - run: spotify-song.py
-      - run: playlist-scrap.py
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create service account key
+        run: |
+          echo '${{ secrets.SERVICE_ACCOUNT }}' > json_key.json
+
+      - name: Run Spotify album scraper
+        run: python spotify-album.py
+
+      - name: Run Spotify artist scraper
+        run: python spotify-artist.py
+
+      - name: Run Spotify radio scraper
+        run: python spotify-radio.py
+
+      - name: Run Spotify song scraper
+        run: python spotify-song.py
+
+      - name: Run Spotify playlist scraper
+        run: python playlist-scrap.py
