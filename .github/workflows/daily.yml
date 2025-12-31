@@ -25,6 +25,9 @@ jobs:
         run: |
           echo '${{ secrets.SERVICE_ACCOUNT }}' > json_key.json
 
+      - name: Install Chrome
+        uses: browser-actions/setrup-chrome@v1
+
       - name: Run Spotify album scraper
         run: python spotify-album.py
 
