@@ -1,11 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 import pandas as pd
-import numpy as np
 import time
 import random
 from datetime import datetime 
@@ -85,7 +83,7 @@ from google.oauth2.service_account import Credentials
 
 role = ['https://www.googleapis.com/auth/spreadsheets','https://www.googleapis.com/auth/drive']
 
-json_key = 'izzo-472202-6ac4e89e0c3d.json'
+json_key = 'json_key.json'
 credits = Credentials.from_service_account_file(json_key, scopes=role)
 client = gspread.authorize(credits)
 
@@ -99,4 +97,5 @@ except:
     append = df.copy()
     for col in append.select_dtypes(include=['datetime', 'datetimetz']).columns:
         append[col] = append[col].astype(str)
+
         work.append_rows(append.values.tolist(), value_input_option='USER_ENTERED')
