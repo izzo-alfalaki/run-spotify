@@ -54,7 +54,7 @@ from google.oauth2.service_account import Credentials
 
 role = ['https://www.googleapis.com/auth/spreadsheets','https://www.googleapis.com/auth/drive']
 
-#json_key = 'json_key.json'
+json_key = 'json_key.json'
 credits = Credentials.from_service_account_file(json_key, scopes=role)
 client = gspread.authorize(credits)
 
@@ -72,4 +72,5 @@ except:
         append[col] = append[col].astype(str)
 
         work.append_rows(append.values.tolist(), value_input_option='USER_ENTERED')
+
 
