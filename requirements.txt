@@ -3,4 +3,4 @@ bs4
 pandas
 numpy
 gspread
-set_with_dataframes
+gspread-dataframe
